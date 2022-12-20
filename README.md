@@ -122,6 +122,16 @@ node server.js
         "typescript": "~4.8.2"
     }
 
+## PAGES OF APPLICATION 
+
+- Homepage 
+    ![Home-Page]
+    ![Home-Page-Cart]
+- Cart-Page
+    ![Cart-Page]
+- Stripe CheckOut-Page
+    ![CheckOut]
+
 
 
 <!-- Markdown link & img dfn's -->
@@ -131,5 +141,8 @@ node server.js
 [travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
 [wiki]: https://github.com/yourname/yourproject/wiki
-
+[Home-Page]: utils/HomePage.png
+[Home-Page-Cart]: utils/HomePageCart.png
+[Cart-Page]: utils/CartPage.png
+[CheckOut]: utils/StripeCheckOutPage.png
 [NPM VERSION]: 'v9.2.0'
