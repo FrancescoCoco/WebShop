@@ -1,0 +1,41 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: store-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - host: storeweb.info
+      http:
+        paths:
+          - path: /store(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: store-service
+                port:
+                  number: 80
+          - path: /store/home(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: store-service
+                port:
+                  number: 80
+          - path: /store/cart(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: store-service
+                port:
+                  number: 80
+          - path: /payments(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: server-service
+                port:
+                  number: 5000

@@ -58,6 +58,7 @@
     npx tailwindcss init
     ```
 
+- In file [server.js](./server/server.js) you need to insert your private key in line 13
 
 
 ## Installation
@@ -87,6 +88,8 @@ node server.js
 
 
 ## Release History
+* 0.2.0
+    * Add implementation of cluster k8s
 
 * 0.1.0
     * Complete Project
@@ -133,6 +136,61 @@ node server.js
     ![CheckOut]
 
 
+## IMPLEMENTATION OF K8S Cluster 
+* The idea is to reproduce locally the functionality of a cloud system using k8s with minikube. 
+Above you can visualize the steps to execute it:
+    -  First of all open your terminal and digits: 
+    
+        ```minikube start --driver=hiperkit```
+    It's important to use hiperkit because default minikube start with docker driver.
+    - We modify the angular/json of the file and we insert the option 
+    
+        ``` "baseHref": "/store/" ```
+    - Now generate the build of the web-app: 
+     
+        ``` ng build  ```
+    -  Now you can build the docker image from the Dockerfile inside WebShop Folder: 
+        
+        ``` docker build -t webshop-image:v1 . ```
+
+    - If you digit: ``` docker images  ```
+     you can visualize it 
+    
+    - Tag the image with the commands: 
+       
+       ```docker tag webshop-image:v1 usernamedocker/webshop-image:v1 ```
+
+    - Push image in the docker hub: 
+
+        ```docker push usernamedocker/webshop-image:v1 ```
+
+    - Now you can use the store-deployment.yaml file: 
+        
+        ``` kubectl apply -f store-deployment.yaml  ```
+
+    - Go to the folder server and repeat the operation for the nodejs server:
+        
+        ``` docker build -t store-image:v1 . ```
+        
+        ```docker tag store-image:v1 usernamedocker/store-image:v1 ```
+
+         ```docker push usernamedocker/store-image:v1 ```
+
+        ``` kubectl apply -f server-deployment.yaml  ```
+    
+    - Return to the main folder and run the ingress: 
+
+        ``` kubectl apply -f store-ingress.yaml  ```
+
+    - Open your file hosts and insert this line: 
+
+        ``` <your_minikubeip> storeweb.info```
+    
+    - Open browser and goes to: 
+       
+       ``` storeweb.info/store ```
+
+    
 
 <!-- Markdown link & img dfn's -->
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square

@@ -26,6 +26,7 @@ import { CartComponent } from './Pages/cart/cart.component';
 import { CartService } from './services/cart.service';
 import { StoreService } from './services/store.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
 
 
 @NgModule({

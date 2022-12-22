@@ -1,0 +1,36 @@
+apiVersion: apps/v1 # Kubernetes API version
+kind: Deployment  # Kubernetes resource kind we are creating
+metadata:
+  name: server-deployment
+spec:
+  selector:
+    matchLabels:
+      app: server
+  replicas: 5 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server
+        image: francescococo8/server-image-docker:v1 # Image that will be used to containers in the cluster
+        ports:
+        - containerPort: 4242 # The port that the container is running on in the cluster
+
+---
+
+kind: Service  # Kubernetes API version
+apiVersion: v1 # Kubernetes resource kind we are creating
+metadata:
+  name: server-service
+spec:
+  selector:
+    app: server
+  ports:
+  - protocol: TCP
+    name: http
+    port: 5000   # The port that the service is running on in the cluster
+    targetPort: 4242   # The port exposed by the container
+    nodePort: 31100
+  type: NodePort     # type of the service.

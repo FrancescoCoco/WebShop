@@ -5,6 +5,8 @@ import { reduce } from 'rxjs';
 import { Cart, CartItem } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
 
+const $URL_PAYMENTS: string = "http://storeweb.info/payments/checkout";
+
 @Component({
   selector: 'app-cart',
   templateUrl:'cart.component.html'
@@ -78,7 +80,7 @@ export class CartComponent implements OnInit{
   }
 
   onCheckOut(): void {
-    this.http.post('http://localhost:4242/checkout',
+    this.http.post($URL_PAYMENTS,
     {
       items: this.cart.items 
     })

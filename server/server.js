@@ -9,10 +9,10 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(cors({ origin: true, credentials: true }));
 
-//Substitute your private key from https://stripe.com/docs/api/connected_accounts
-const stripe = require("stripe")("privatekey");
+//Insert your private key from stripe
+const stripe = require("stripe")("your private key");
 
-//In cart.component.ts you indicate http://localhost:4042/checkout as url 
+
 app.post("/checkout", async (req, res, next) => {
     try {
         //Create session 
